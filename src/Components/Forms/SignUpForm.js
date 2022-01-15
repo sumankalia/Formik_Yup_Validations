@@ -1,11 +1,14 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import "yup-phone";
 
 const SignUpSchema = Yup.object().shape({
   firstName: Yup.string().required("This field is required"),
   email: Yup.string().email("Invalid email").required("This field is required"),
-  phone: Yup.number().required("This field is required"),
+  phone: Yup.string()
+    .phone(null, true, "Invalid phone number")
+    .required("Invalid Phone Number."),
   password: Yup.string()
     .required("This field is required")
     .min(6, "must be of 6 characters long."),
@@ -17,6 +20,11 @@ const SignUpSchema = Yup.object().shape({
     [true],
     "Please accept terms and conditons"
   ),
+  additionalInfoFlag: Yup.boolean(),
+  additionalInfo: Yup.string().when("additionalInfoFlag", {
+    is: true,
+    then: Yup.string().required("This field is required!"),
+  }),
 });
 
 const SignupForm = () => {
@@ -203,6 +211,7 @@ const SignupForm = () => {
                   className="form-check-input"
                   type="checkbox"
                   id="additionalInfoFlag"
+                  name="additionalInfoFlag"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.additionalInfoFlag}
@@ -211,7 +220,7 @@ const SignupForm = () => {
                   className="form-check-label"
                   htmlFor="additionalInfoFlag"
                 >
-                  Additional Information
+                  Additonal Information
                 </label>
               </div>
             </div>
@@ -219,7 +228,7 @@ const SignupForm = () => {
             {formik.values.additionalInfoFlag && (
               <div className="form-group mt-2">
                 <label htmlFor="additionalInfo">
-                  Enter Additional Information
+                  Enter Addtional Information
                 </label>
                 <textarea
                   className="form-control"
@@ -227,6 +236,7 @@ const SignupForm = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.additionalInfo}
+                  id="additionalInfo"
                 ></textarea>
                 {formik.touched.additionalInfo &&
                   formik.errors.additionalInfo && (
