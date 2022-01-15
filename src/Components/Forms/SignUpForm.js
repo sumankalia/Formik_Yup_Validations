@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "yup-phone";
 
@@ -55,17 +55,20 @@ const SignupForm = () => {
               <label for="firstName">First Name</label>
               <Field type="text" name="firstName" className="form-control" />
 
-              {formik.touched.firstName && formik.errors.firstName && (
-                <span className="field_error">{formik.errors.firstName}</span>
-              )}
+              <ErrorMessage
+                name="firstName"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="lastName">Last Name</label>
               <Field type="text" name="lastName" className="form-control" />
-
-              {formik.touched.lastName && formik.errors.lastName && (
-                <span className="field_error">{formik.errors.lastName}</span>
-              )}
+              <ErrorMessage
+                name="lastName"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label>Gender</label>
@@ -113,26 +116,29 @@ const SignupForm = () => {
             <div className="form-group mt-2">
               <label for="email">Email</label>
               <Field type="email" name="email" className="form-control" />
-
-              {formik.touched.email && formik.errors.email && (
-                <span className="field_error">{formik.errors.email}</span>
-              )}
+              <ErrorMessage
+                name="email"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="phone">Phone Number</label>
               <Field type="number" name="phone" className="form-control" />
-
-              {formik.touched.phone && formik.errors.phone && (
-                <span className="field_error">{formik.errors.phone}</span>
-              )}
+              <ErrorMessage
+                name="phone"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="password">Password</label>
               <Field type="password" name="password" className="form-control" />
-
-              {formik.touched.password && formik.errors.password && (
-                <span className="field_error">{formik.errors.password}</span>
-              )}
+              <ErrorMessage
+                name="password"
+                component="span"
+                className="field_error"
+              />
             </div>
             <div className="form-group mt-2">
               <label for="confirmPassword">Confirm Password</label>
@@ -141,13 +147,11 @@ const SignupForm = () => {
                 name="confirmPassword"
                 className="form-control"
               />
-
-              {formik.touched.confirmPassword &&
-                formik.errors.confirmPassword && (
-                  <span className="field_error">
-                    {formik.errors.confirmPassword}
-                  </span>
-                )}
+              <ErrorMessage
+                name="confirmPassword"
+                component="span"
+                className="field_error"
+              />
             </div>
 
             <div className="form-group mt-2">
@@ -188,13 +192,11 @@ const SignupForm = () => {
                   name="additionalInfo"
                   value={formik.values.additionalInfo}
                 />
-
-                {formik.touched.additionalInfo &&
-                  formik.errors.additionalInfo && (
-                    <span className="field_error">
-                      {formik.errors.additionalInfo}
-                    </span>
-                  )}
+                <ErrorMessage
+                  name="additionalInfo"
+                  component="span"
+                  className="field_error"
+                />
               </div>
             )}
 
@@ -211,12 +213,11 @@ const SignupForm = () => {
                   Accept terms and conditions.
                 </label>
               </div>
-              {formik.touched.termsAndCondtions &&
-                formik.errors.termsAndCondtions && (
-                  <span className="field_error">
-                    {formik.errors.termsAndCondtions}
-                  </span>
-                )}
+              <ErrorMessage
+                name="termsAndCondtions"
+                component="span"
+                className="field_error"
+              />
             </div>
 
             <div className="d-grid mt-2">
